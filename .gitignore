@@ -5,6 +5,7 @@ __pycache__/
 
 .idea
 Pipfile.lock
+IPProxyPool/logs
 
 # C extensions
 *.so
