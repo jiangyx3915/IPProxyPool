@@ -1,5 +1,5 @@
 """
-代理抓取文件
+代理抓取器
 """
 import json
 import re
