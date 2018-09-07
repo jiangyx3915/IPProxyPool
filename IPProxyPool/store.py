@@ -54,6 +54,58 @@ class RedisClient:
             else:
                 raise PoolEmptyError
 
+    def decrease(self, proxy):
+        """
+        代理分数减一，小于最小值则删除该代理
+        :param proxy:   代理
+        :return:        修改后代理的分数
+
+        zscore  返回有序集合key中指定成员的分数
+        """
+        score = self.db.zscore(REDIS_KEY, proxy)
+        if score and score > MIN_SCORE:
+            logger.info('代理 {}, 当前分数 {}, 减一'.format(proxy, score))
+            return self.db.zincrby(REDIS_KEY, proxy, -1)
+        else:
+            logger.info('代理 {} 移除'.format(proxy))
+            return self.db.zrem(REDIS_KEY, proxy)
+
+    def exists(self, proxy):
+        """判断代理是否存在"""
+        return not self.db.zscore(REDIS_KEY, proxy) is None
+
+    def max(self, proxy):
+        """
+        将代理值设置为最大值
+        :param proxy:   代理
+        :return:        设置的结果
+        """
+        logger.info('代理 {} 设置为 {}'.format(proxy, MAX_SCORE))
+        self.db.zadd(REDIS_KEY, MAX_SCORE, proxy)
+
+    def count(self):
+        """
+        获取代理数量
+        :return:    代理数量
+        """
+        return self.db.zcard(REDIS_KEY)
+
+    def all(self):
+        """
+        获取全部代理
+        :return:    代理列表
+        """
+        return self.db.zrangebyscore(REDIS_KEY, MIN_SCORE, MAX_SCORE)
+
+    def batch(self, start, end):
+        """
+        批量获取代理
+        :param start:   开始索引
+        :param end:     结束索引
+        :return:        代理列表
+        """
+        return self.db.zrevrange(REDIS_KEY, start, end-1)
+
 
 if __name__ == '__main__':
     client = RedisClient()
