@@ -10,3 +10,4 @@ REDIS_KEY = 'proxies'       # 代理池redis键值
 INITIAL_SCORE = 10          # 初始化分数
 MIN_SCORE = 0               # 最低分
 MAX_SCORE = 100             # 最高分
+POOL_MAX_THRESHOLD = 5000   # 代理池容量限制

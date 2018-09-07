@@ -24,6 +24,7 @@ class ProxyMetaClass(type):
 
 
 class ProxyCrawl(object, metaclass=ProxyMetaClass):
+
     def get_proxies(self, callback):
         """
         通过传进的方法名，动态进行方法调用，获取到抓回来的代理
@@ -56,6 +57,7 @@ class ProxyCrawl(object, metaclass=ProxyMetaClass):
 
 
 if __name__ == '__main__':
-    crawl = ProxyCrawl()
-    for proxy in crawl.get_proxies('crawl_66ip'):
-        print(proxy)
+    crawler = ProxyCrawl()
+    print(crawler.__CrawlFunc__)
+    # for proxy in crawler.get_proxies('crawl_66ip'):
+    #     print(proxy)

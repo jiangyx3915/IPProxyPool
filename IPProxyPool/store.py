@@ -109,4 +109,4 @@ class RedisClient:
 
 if __name__ == '__main__':
     client = RedisClient()
-    print(client.db.get('name'))
+    print(client.batch(100, 200))
