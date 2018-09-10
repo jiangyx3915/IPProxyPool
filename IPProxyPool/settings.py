@@ -13,3 +13,16 @@ MAX_SCORE = 100             # 最高分
 POOL_MAX_THRESHOLD = 5000   # 代理池容量限制
 
 BATCH_TEST_SIZE = 10        # 批量测试数量
+
+# 检查周期配置
+TESTER_CYCLE = 20           # 测试器运行周期
+GETTER_CYCLE = 300          # 获取器运行周期
+
+# 模块加载配置
+ENABLE_TESTER = True        # 是否开启测试器
+ENABLE_GETTER = True        # 是否开启获取器
+ENABLE_API = True           # 是否开启API的支持
+
+# api配置
+API_HOST = '0.0.0.0'        # API 服务器地址
+API_PORT = 5000             # API 服务器端口

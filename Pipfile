@@ -7,8 +7,8 @@ name = "pypi"
 requests = "*"
 pyquery = "*"
 redis = "*"
-schedule = "*"
 aiohttp = "*"
+flask = "*"
 
 [dev-packages]
 
